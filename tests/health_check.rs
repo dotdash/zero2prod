@@ -20,7 +20,7 @@ fn spawn_app() -> String {
     let listener = TcpListener::bind("127.1:0").expect("Failed to bind random port on localhost.");
 
     let port = listener.local_addr().unwrap().port();
-    tokio::spawn(zero2prod::run(listener).expect("Failed to bind address."));
+    tokio::spawn(zero2prod::startup::run(listener).expect("Failed to bind address."));
 
     format!("http://127.1:{port}")
 }

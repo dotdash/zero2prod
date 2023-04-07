@@ -11,6 +11,7 @@ pub fn run(listener: TcpListener, connection_pool: PgPool) -> std::io::Result<Se
     Ok(HttpServer::new(move || {
         App::new()
             .route("/health_check", web::get().to(routes::health_check))
+            .route("/subscriptions", web::post().to(routes::subscribe))
             .app_data(connection_pool.clone())
     })
     .listen(listener)?
